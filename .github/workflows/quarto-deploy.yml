@@ -3,7 +3,7 @@ name: Quarto Publish
 on:
   push:
     branches:
-      - main  # Replace with your branch if necessary
+      - main  # Change to your branch if necessary
 
 jobs:
   build-deploy:
@@ -13,6 +13,8 @@ jobs:
       # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2  # Ensure we fetch more commits if needed
 
       # Step 2: Setup Quarto
       - name: Setup Quarto
@@ -30,7 +32,7 @@ jobs:
       - name: Render Quarto documents
         run: |
           mkdir -p _site  # Ensure the _site directory exists
-          for file in $(find . -name "*.qmd"); do
+          find . -name "*.qmd" -print0 | while IFS= read -r -d '' file; do
             echo "Rendering $file"
             quarto render "$file"
           done
