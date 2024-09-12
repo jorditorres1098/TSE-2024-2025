@@ -14,11 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Setup Quarto - Use stable version instead of 'latest'
+      # Step 2: Setup Quarto
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: '1.3.433'  # Specify a known working version of Quarto
+          version: '1.3.433'  # Or any stable version
 
       # Step 3: Install R (if using R in Quarto files)
       - name: Setup R
@@ -26,9 +26,12 @@ jobs:
         with:
           r-version: 'latest'
 
-      # Step 4: Render the Quarto project
-      - name: Render Quarto site
-        run: quarto render
+      # Step 4: Render specific Quarto file(s)
+      - name: Render Quarto document
+        run: |
+          quarto render *.qmd  # Replace "yourfile.qmd" with the actual filename
+          # You can render multiple files like this:
+          # quarto render file1.qmd file2.qmd
 
       # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
