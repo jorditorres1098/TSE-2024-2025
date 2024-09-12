@@ -3,7 +3,7 @@ name: Quarto Publish
 on:
   push:
     branches:
-      - main  # This will trigger the workflow on changes to the "main" branch
+      - main  # Change to your branch if necessary
 
 jobs:
   build-deploy:
@@ -14,11 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Setup Quarto
+      # Step 2: Setup Quarto - Use stable version instead of 'latest'
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: 'latest'
+          version: '1.3.433'  # Specify a known working version of Quarto
 
       # Step 3: Install R (if using R in Quarto files)
       - name: Setup R
