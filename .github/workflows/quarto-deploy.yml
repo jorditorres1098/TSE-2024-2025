@@ -15,27 +15,30 @@ jobs:
         uses: actions/checkout@v3
 
       # Step 2: Setup Quarto
-      - name: Setup Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          version: '1.3.433'  # Or any stable version
+        - name: Setup Quarto
+          uses: quarto-dev/quarto-actions/setup@v2
+          with:
+            version: '1.3.433'  # Or any stable version
 
       # Step 3: Install R (if using R in Quarto files)
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: 'latest'
+        - name: Setup R
+          uses: r-lib/actions/setup-r@v2
+          with:
+            r-version: 'latest'
 
-      # Step 4: Render specific Quarto file(s)
-      - name: Render Quarto document
-        run: |
-          quarto render *.qmd  # Replace "yourfile.qmd" with the actual filename
-          # You can render multiple files like this:
-          # quarto render file1.qmd file2.qmd
+      # Step 4: Render all .qmd files
+        - name: Render Quarto documents
+          run: |
+            mkdir -p _site  # Ensure the _site directory exists
+            for file in $(find . -name "*.qmd"); do
+              echo "Rendering $file"
+              quarto render "$file"
+            done
 
       # Step 5: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site  # This is where the rendered HTML will be placed
+        - name: Deploy to GitHub Pages
+          uses: peaceiris/actions-gh-pages@v4
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./_site  # Directory where the rendered HTML will be placed
+
