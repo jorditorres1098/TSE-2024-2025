@@ -3,6 +3,46 @@ title: "Micro notes, production sets"
 format: html
 ---
 
-#title 
+# Introduction
 
-I am having this issue and I think I have finally made it.
+This is a basic Quarto Markdown template for writing notes. You can organize your content into sections, use code blocks, lists, and much more.
+
+## Table of Contents
+
+1. [Section 1](#section-1)
+2. [Section 2](#section-2)
+3. [Section 3](#section-3)
+
+---
+
+# Section 1: Main Topic
+
+Start by describing the main topic. You can add paragraphs, images, or quotes.
+
+> **Note:** This is a highlighted note.
+
+## Subsection 1.1: Key Concepts
+
+Use subsections to break down topics into manageable chunks.
+
+### Bullet Points:
+- **Key point 1**: Description of the key point.
+- **Key point 2**: Further explanation.
+
+### Numbered List:
+1. First important thing.
+2. Another important concept.
+
+### Task List:
+- [ ] Task 1
+- [x] Task 2 (completed)
+
+## Subsection 1.2: Code Example in R
+
+You can write R code blocks and render them directly within the document.
+
+```{r}
+# R code example
+summary(cars)
+
+
